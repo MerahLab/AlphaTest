@@ -1,6 +1,7 @@
 🍪 What is a Cookie?
 .......................
 .......................
+.......................
 A cookie is a small piece of data stored in the user's browser. 
 It is sent back to the server with every request.
 
@@ -109,4 +110,5 @@ Use Case	         Remembering preferences (e.g., theme, language)	Storing tempor
 Use Cookies when you need to store small, non-sensitive data for a long time.
 🏷️ Example: "Remember Me" feature in login forms.
 Use Sessions when you need to store temporary, sensitive data that shouldn’t be visible to the user.
+
 🛒 Example: Shopping cart items.
