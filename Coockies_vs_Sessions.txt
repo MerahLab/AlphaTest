@@ -1,0 +1,112 @@
+🍪 What is a Cookie?
+.......................
+.......................
+A cookie is a small piece of data stored in the user's browser. 
+It is sent back to the server with every request.
+
+✅ Example:
+Think of a cookie like a small note your browser keeps for a website.
+For example, when you log in to a website, the website might store your 
+username in a cookie so it remembers you the next time you visit.
+-----------------------------------------------------------------------------------
+
+📌 Key Features of Cookies:
+Stored on the client-side (browser).
+Sent to the server with every request.
+Can be set to expire after a certain time.
+Used to remember user preferences (e.g., dark mode, language selection).
+Limited size (about 4 KB).
+------------------------------------------------------------------------------------
+🔥 Example: How to Set and Get Cookies in ASP.NET Core MVC
+👉 Setting a Cookie in a Controller:
+
+
+public IActionResult SetCookie()
+{
+    CookieOptions options = new CookieOptions();
+    options.Expires = DateTime.Now.AddMinutes(10); // Cookie expires in 10 minutes
+    Response.Cookies.Append("UserName", "JohnDoe", options);
+    return Content("Cookie set!");
+}
+--------------------------------------------------------------------------------------
+👉 Getting a Cookie in a Controller:
+
+public IActionResult GetCookie()
+{
+    string userName = Request.Cookies["UserName"];
+    return Content($"Hello, {userName}!");
+}
+---------------------------------------------------------------------------------------
+
+*******************************************************************************************
+*******************************************************************************************
+
+🛠️ What is a Session?
+.........................
+.........................
+A session is a temporary storage on the server that keeps track of user data while they are using the website.
+Unlike cookies, session data is not stored in the browser.
+
+✅ Example:
+Imagine you are shopping online. If you add items to your cart and navigate to another page, the website remembers what's in your cart.
+This is because the website is using a session.
+=====================================================================================================================================
+📌 Key Features of Sessions:
+Stored on the server-side.
+Each user gets a unique session ID stored in a cookie.
+Expires when the user closes the browser or after a set time.
+Used for storing temporary user data (e.g., shopping cart, login status).
+Larger storage compared to cookies.
+=========================================================================================================================================
+
+🔥 Example: How to Use Session in ASP.NET Core MVC
+👉 Enable Sessions in Program.cs (Middleware Configuration)
+
+
+var builder = WebApplication.CreateBuilder(args);
+var app = builder.Build();
+
+app.UseSession(); // Enable session middleware
+
+app.MapGet("/", () => "Hello World!");
+
+app.Run();
+
+👉 Setting a Session Value in a Controller:
+
+
+public IActionResult SetSession()
+{
+    HttpContext.Session.SetString("UserName", "JohnDoe");
+    return Content("Session set!");
+}
+
+👉 Getting a Session Value in a Controller:
+
+
+public IActionResult GetSession()
+{
+    string userName = HttpContext.Session.GetString("UserName");
+    return Content($"Hello, {userName}!");
+}
+
+Feature	                             Cookie 🍪	                                   Session 🛠️
+---------------------||-----------------------------------------------||---------------------------------------
+Storage Location	          Stored in browser	                        Stored on server
+----------------------------------------------------------------------------------------------------------------
+Data Size	                  Small (4 KB limit)	                      Can store larger data
+----------------------------------------------------------------------------------------------------------------
+Expiration	                  Can last days, months, or years	      Ends when the browser is closed (or timeout)
+------------------------------------------------------------------------------------------------------------------------------
+Security	                  Less secure (stored in browser)     	     More secure (stored on server)	
+---------------------------------------------------------------------------------------------------------------------------------
+Use Case	         Remembering preferences (e.g., theme, language)	Storing temporary user data (e.g., cart, login info)
+------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+❓ When to Use What?
+Use Cookies when you need to store small, non-sensitive data for a long time.
+🏷️ Example: "Remember Me" feature in login forms.
+Use Sessions when you need to store temporary, sensitive data that shouldn’t be visible to the user.
+🛒 Example: Shopping cart items.
